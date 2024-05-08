@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css"
+        integrity="sha512-EZLkOqwILORob+p0BXZc+Vm3RgJBOe1Iq/0fiI7r/wJgzOFZMlsqTa29UEl6v6U6gsV4uIpsNZoV32YZqrCRCQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Add Your Favorite Book List</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <h3>Add book</h3>
+            <form action="" method="post">
+                <div>
+                    <label for="title">Title</label>
+                    <input type="text" id="title" class="u-full-width">
+                </div>
+                <div>
+                    <label for="author">Author</label>
+                    <input type="text" id="author" class="u-full-width">
+                </div>
+                <div>
+                    <label for="icbn">ICBN#</label>
+                    <input type="text" id="icbn" class="u-full-width">
+                </div>
+                <div>
+                    <input type="button" value="Add" class="u-full-width">
+                </div>
+            </form>
+            <table class="u-full-width">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Author</th>
+                        <th>ISBN#</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody class="book-list">
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script src="assets/js/app.js"></script>
+</body>
+
+</html>
