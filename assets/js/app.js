@@ -1,5 +1,3 @@
-// soleve this problem used OOP
-let form = document.querySelector('#book-form');
 class Book {
     constructor(title, author, isbn){
         this.title = title;
@@ -7,35 +5,76 @@ class Book {
         this.isbn = isbn;
     }
 }
-class ShowBook {
-    constructor(){
 
+class BookList {
+    constructor() {
+        this.books = [];
     }
-    AddToBookList(book){
-        let bookList = document.querySelector('#book-list');
-        let row = document.createElement('tr');
+
+    addBook(book) {
+        this.books.push(book);
+    }
+
+    removeBook(isbn) {
+        this.books = this.books.filter(book => book.isbn !== isbn);
+    }
+}
+
+class UI {
+    static addToBookList(book) {
+        const row = document.createElement('tr');
         row.innerHTML = `
-        <td>${book.title}</td>
-        <td>${book.author}</td>
-        <td>${book.isbn}</td>
-        <td><a class="delete" href="#">X</a></td>
-        `
-        bookList.appendChild(row);
+            <td>${book.title}</td>
+            <td>${book.author}</td>
+            <td>${book.isbn}</td>
+            <td><a href="#" class="delete">X</a></td>
+        `;
+        document.querySelector('#book-list').appendChild(row);
     }
-    clearInput(){
+
+    static clearInput() {
         document.querySelector('#title').value = '';
-        document.querySelector('#author').value ='';
-        document.querySelector('#isbn').value ='';
+        document.querySelector('#author').value = '';
+        document.querySelector('#isbn').value = '';
+    }
+
+    static showAlert(message, className) {
+        const div = document.createElement('div');
+        div.className = `alert ${className}`;
+        div.appendChild(document.createTextNode(message));
+
+        // Get the parent element where the alert will be inserted
+        const container = document.querySelector('.container');
+        if (!container) {
+            console.error("Container element not found in the DOM.");
+            return;
+        }
+
+        // Insert the alert before the first child of the container
+        container.insertBefore(div, container.firstChild);
+        setTimeout(() => div.remove(), 3000);
     }
 }
-form.addEventListener('submit', newBook);
-function newBook(e){
-    title = document.querySelector('#title').value,
-    author = document.querySelector('#author').value,
-    isbn = document.querySelector('#isbn').value;
-    let book = new Book(title, author, isbn);
-    let showBookList = new ShowBook();
-    showBookList.AddToBookList(book);
-    showBookList.clearInput()
+
+document.querySelector('#book-form').addEventListener('submit', e => {
     e.preventDefault();
-}
+    const title = document.querySelector('#title').value;
+    const author = document.querySelector('#author').value;
+    const isbn = document.querySelector('#isbn').value;
+
+    if (title === '' || author === '' || isbn === '') {
+        UI.showAlert("All fields are required", "error");
+    } else {
+        const book = new Book(title, author, isbn);
+        UI.addToBookList(book);
+        UI.clearInput();
+        UI.showAlert("Book added", "success");
+    }
+});
+
+document.querySelector('#book-list').addEventListener('click', e => {
+    if (e.target.classList.contains('delete')) {
+        e.target.parentElement.parentElement.remove();
+        UI.showAlert("Book removed", "success");
+    }
+});
