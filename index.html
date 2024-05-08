@@ -14,7 +14,7 @@
     <div class="container">
         <div class="row">
             <h3>Add book</h3>
-            <form action="" method="post">
+            <form id="book-form">
                 <div>
                     <label for="title">Title</label>
                     <input type="text" id="title" class="u-full-width">
@@ -24,11 +24,11 @@
                     <input type="text" id="author" class="u-full-width">
                 </div>
                 <div>
-                    <label for="icbn">ICBN#</label>
-                    <input type="text" id="icbn" class="u-full-width">
+                    <label for="icbn">ISBN#</label>
+                    <input type="text" id="isbn" class="u-full-width">
                 </div>
                 <div>
-                    <input type="button" value="Add" class="u-full-width">
+                    <input type="submit" value="Add" class="u-full-width">
                 </div>
             </form>
             <table class="u-full-width">
@@ -40,7 +40,7 @@
                         <th></th>
                     </tr>
                 </thead>
-                <tbody class="book-list">
+                <tbody id="book-list">
 
                 </tbody>
             </table>
